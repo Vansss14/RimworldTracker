@@ -12,11 +12,7 @@
         .rim-font { font-family: 'Cinzel', serif; }
         .rim-card { background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); backdrop-filter: blur(16px); border: 1px solid rgba(245, 158, 11, 0.25); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6); }
         .rim-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.12); }
-        /* Custom Scrollbar for Creature Scroll Box */
-        .custom-scroll::-webkit-scrollbar { width: 8px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #090e17; border-radius: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; border: 1px solid #475569; }
-        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+        select option { background-color: #0f172a; color: #f8fafc; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
@@ -48,21 +44,21 @@
             <h2 class="text-sm uppercase tracking-wider font-bold text-amber-400 mb-6 rim-font flex items-center gap-2">
                 <i class="fa-solid fa-sliders text-amber-500"></i> Simulation Parameters & Creature Selection
             </h2>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
-                <!-- Scrollable Creature Selector Box -->
-                <div class="lg:col-span-1 flex flex-col">
-                    <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Scroll & Select Creature</label>
-                    <div id="creature-scroll-box" class="w-full h-44 bg-slate-950 border border-slate-700 rounded-xl overflow-y-auto custom-scroll p-2 space-y-1 shadow-inner">
-                        <!-- Populated dynamically with rich interactive list items -->
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Creature Select Dropdown -->
+                <div>
+                    <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Select Creature (Vanilla + DLCs)</label>
+                    <select id="creature-select" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors shadow-inner">
+                        <!-- Populated via JavaScript -->
+                    </select>
                 </div>
-
-                <!-- Tamer Skill -->
+                <!-- Pawn Animal Skill -->
                 <div>
                     <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Tamer's Animals Skill (Level 0 - 20)</label>
-                    <input type="number" id="pawn-skill" min="0" max="20" value="8" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors shadow-inner font-mono mb-4">
-                    
+                    <input type="number" id="pawn-skill" min="0" max="20" value="8" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors shadow-inner font-mono">
+                </div>
+                <!-- Pawn Passion -->
+                <div>
                     <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Pawn's Animal Passion</label>
                     <select id="pawn-passion" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors shadow-inner">
                         <option value="0">None (No Flame)</option>
@@ -70,27 +66,13 @@
                         <option value="2">Major Passion (Double Flame)</option>
                     </select>
                 </div>
-
-                <!-- Quick Status Summary Card -->
-                <div class="bg-slate-950/80 p-5 rounded-xl border border-amber-500/20 flex flex-col justify-between shadow-inner">
-                    <div>
-                        <span class="text-[10px] text-amber-400 uppercase tracking-widest font-mono block mb-1">Active Specimen</span>
-                        <h4 id="quick-panel-title" class="text-white font-bold text-base rim-font">Muffalo</h4>
-                        <p id="quick-panel-sub" class="text-xs text-slate-400 mt-1">Vanilla Pack & Farm Animal</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-300 flex justify-between">
-                        <span>Wildness Factor:</span>
-                        <strong id="quick-panel-wildness" class="text-amber-400 font-mono">60%</strong>
-                    </div>
-                </div>
-
             </div>
         </section>
 
         <!-- Dynamic Results Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            <!-- Column 1: Specimen Visual Profile & Real Photo -->
+            <!-- Column 1: Specimen Visual Profile -->
             <div class="rim-card rounded-2xl p-6 flex flex-col justify-between text-center shadow-xl">
                 <div>
                     <div class="flex justify-between items-center mb-4">
@@ -99,10 +81,13 @@
                     </div>
                     <h3 id="creature-name" class="text-2xl font-bold text-white rim-font mb-4">Muffalo</h3>
                     
-                    <!-- Real In-Game Sprite Container -->
-                    <div class="w-full h-48 bg-gradient-to-b from-slate-900/90 to-slate-950 rounded-xl border border-slate-800 flex flex-col items-center justify-center relative overflow-hidden shadow-inner mb-6 group p-4">
+                    <!-- Clean Icon Badge Container (Guaranteed to work without broken external links) -->
+                    <div class="w-full h-48 bg-gradient-to-b from-slate-900/90 to-slate-950 rounded-xl border border-slate-800 flex flex-col items-center justify-center relative overflow-hidden shadow-inner mb-6 group">
                         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.08)_0%,transparent_70%)]"></div>
-                        <img id="creature-img" src="" alt="RimWorld Creature Sprite" class="max-h-36 max-w-full object-contain filter drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i id="creature-icon" class="fa-solid fa-paw text-amber-400 text-3xl drop-shadow"></i>
+                        </div>
+                        <span class="text-[11px] text-slate-400 font-mono tracking-widest uppercase">Target Specimen</span>
                     </div>
                 </div>
 
@@ -223,7 +208,7 @@
 
     <!-- JavaScript Engine -->
     <script>
-        // Comprehensive Creature Database including Vanilla + DLCs (Royalty, Ideology, Biotech, Anomaly)
+        // Comprehensive Creature Database (Vanilla + DLCs)
         const creatures = [
             {
                 name: "Muffalo",
@@ -235,7 +220,7 @@
                 health: "100%",
                 use: "Exceptional pack animal for caravans, produces daily wool and milk.",
                 verdict: "Highly worth taming early for long-distance trading and warm winter apparel.",
-                img: "https://rimworldwiki.com/images/thumb/5/5a/Muffalo.png/200px-Muffalo.png"
+                icon: "fa-horse"
             },
             {
                 name: "Labrador Retriever",
@@ -247,7 +232,7 @@
                 health: "80%",
                 use: "Top-tier hauling pet, boosts colony mood when petted, eats simple kibble.",
                 verdict: "Must-have pet. Never release a self-tamed dog; they provide huge mood buffs and do heavy lifting.",
-                img: "https://rimworldwiki.com/images/thumb/b/b5/LabradorRetriever.png/200px-LabradorRetriever.png"
+                icon: "fa-dog"
             },
             {
                 name: "Grizzly Bear",
@@ -259,7 +244,7 @@
                 health: "150%",
                 use: "Fierce combat guard animal and hauling specialist for heavy items.",
                 verdict: "Worth taming if you have high animal skill and excess meat to feed carnivores.",
-                img: "https://rimworldwiki.com/images/thumb/3/36/GrizzlyBear.png/200px-GrizzlyBear.png"
+                icon: "fa-paw"
             },
             {
                 name: "Thrumbo",
@@ -271,7 +256,7 @@
                 health: "600%",
                 use: "God-tier combat tank, supreme caravan carrying capacity, valuable horn/fur.",
                 verdict: "Incredible reward if successfully tamed by a master animal handler, but very high revenge risk.",
-                img: "https://rimworldwiki.com/images/thumb/c/cf/Thrumbo.png/200px-Thrumbo.png"
+                icon: "fa-dragon"
             },
             {
                 name: "Megasloth",
@@ -283,50 +268,8 @@
                 health: "220%",
                 use: "Heavy wool producer (Megasloth wool has insane cold armor rating) and powerful defender.",
                 verdict: "Great long-term investment for cold-biome colonies.",
-                img: "https://rimworldwiki.com/images/thumb/7/7b/Megasloth.png/200px-Megasloth.png"
+                icon: "fa-hippo"
             },
             {
                 name: "Warg",
-                dlc: "Vanilla",
-                wildness: 0.75,
-                diet: "Strict Carnivore (Only raw meat/corpses)",
-                trainability: "Advanced",
-                dps: 6.50,
-                health: "130%",
-                use: "Pure combat predator that cleans up battlefield corpses.",
-                verdict: "High food maintenance, but exceptional frontline combat asset.",
-                img: "https://rimworldwiki.com/images/thumb/a/a3/Warg.png/200px-Warg.png"
-            },
-            {
-                name: "Husky",
-                dlc: "Vanilla",
-                wildness: 0.10,
-                diet: "Omnivore",
-                trainability: "Advanced",
-                dps: 2.30,
-                health: "85%",
-                use: "Cold-resistant hauling dog that provides high mood boosts when petted.",
-                verdict: "Excellent all-around companion pet for temperate and cold climates.",
-                img: "https://rimworldwiki.com/images/thumb/d/d4/Husky.png/200px-Husky.png"
-            },
-            {
-                name: "Elephant",
-                dlc: "Vanilla",
-                wildness: 0.75,
-                diet: "Herbivore",
-                trainability: "Advanced",
-                dps: 7.20,
-                health: "300%",
-                use: "Colossal hauling capacity and devastating tank in combat.",
-                verdict: "Amazing if you have vast vegetation or crops to sustain their huge appetite.",
-                img: "https://rimworldwiki.com/images/thumb/9/91/Elephant.png/200px-Elephant.png"
-            },
-            {
-                name: "Lox",
-                dlc: "Royalty DLC",
-                wildness: 0.70,
-                diet: "Herbivore",
-                trainability: "Intermediate",
-                dps: 6.20,
-                health: "250%",
-                use
+                dlc:
