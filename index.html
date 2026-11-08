@@ -12,7 +12,6 @@
         .rim-font { font-family: 'Cinzel', serif; }
         .rim-card { background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); backdrop-filter: blur(16px); border: 1px solid rgba(245, 158, 11, 0.25); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6); }
         .rim-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.12); }
-        /* Explicitly style select and options for high visibility */
         select { background-color: #0f172a !important; color: #ffffff !important; }
         select option { background-color: #0f172a !important; color: #ffffff !important; padding: 10px; }
     </style>
@@ -33,7 +32,7 @@
             </div>
             <div class="flex items-center gap-2 text-xs bg-slate-900 px-3.5 py-2 rounded-xl border border-amber-500/30 text-amber-400 font-mono shadow-inner">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Colony Simulation Engine v1.6 Active</span>
+                <span>Full Expansion Bestiary v1.6 Active</span>
             </div>
         </div>
     </header>
@@ -47,9 +46,9 @@
                 <i class="fa-solid fa-sliders text-amber-500"></i> Simulation Parameters & Creature Selection
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Creature Select Dropdown -->
+                <!-- Creature Select Dropdown (Expanded with ALL Creatures + DLCs) -->
                 <div>
-                    <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Select Creature (Vanilla + DLCs)</label>
+                    <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Select Creature (All Vanilla & DLCs)</label>
                     <select id="creature-select" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors shadow-inner">
                         <!-- Populated via JavaScript -->
                     </select>
@@ -209,176 +208,62 @@
 
     <!-- JavaScript Engine -->
     <script>
-        // Comprehensive Creature Database (Vanilla + DLCs)
+        // Massive Comprehensive Bestiary (Vanilla + Royalty + Ideology + Biotech + Anomaly)
         const creatures = [
-            {
-                name: "Muffalo",
-                dlc: "Vanilla",
-                wildness: 0.60,
-                diet: "Herbivore",
-                trainability: "Intermediate",
-                dps: 3.05,
-                health: "100%",
-                use: "Exceptional pack animal for caravans, produces daily wool and milk.",
-                verdict: "Highly worth taming early for long-distance trading and warm winter apparel.",
-                icon: "fa-horse"
-            },
-            {
-                name: "Labrador Retriever",
-                dlc: "Vanilla",
-                wildness: 0.05,
-                diet: "Omnivore",
-                trainability: "Advanced",
-                dps: 2.10,
-                health: "80%",
-                use: "Top-tier hauling pet, boosts colony mood when petted, eats simple kibble.",
-                verdict: "Must-have pet. Never release a self-tamed dog; they provide huge mood buffs and do heavy lifting.",
-                icon: "fa-dog"
-            },
-            {
-                name: "Grizzly Bear",
-                dlc: "Vanilla",
-                wildness: 0.80,
-                diet: "Carnivore",
-                trainability: "Advanced",
-                dps: 5.36,
-                health: "150%",
-                use: "Fierce combat guard animal and hauling specialist for heavy items.",
-                verdict: "Worth taming if you have high animal skill and excess meat to feed carnivores.",
-                icon: "fa-paw"
-            },
-            {
-                name: "Thrumbo",
-                dlc: "Vanilla",
-                wildness: 0.95,
-                diet: "Dendrovorous (Eats Trees)",
-                trainability: "Advanced",
-                dps: 9.70,
-                health: "600%",
-                use: "God-tier combat tank, supreme caravan carrying capacity, valuable horn/fur.",
-                verdict: "Incredible reward if successfully tamed by a master animal handler, but very high revenge risk.",
-                icon: "fa-dragon"
-            },
-            {
-                name: "Megasloth",
-                dlc: "Vanilla",
-                wildness: 0.85,
-                diet: "Herbivore",
-                trainability: "Intermediate",
-                dps: 4.80,
-                health: "220%",
-                use: "Heavy wool producer (Megasloth wool has insane cold armor rating) and powerful defender.",
-                verdict: "Great long-term investment for cold-biome colonies.",
-                icon: "fa-hippo"
-            },
-            {
-                name: "Warg",
-                dlc: "Vanilla",
-                wildness: 0.75,
-                diet: "Strict Carnivore (Only raw meat/corpses)",
-                trainability: "Advanced",
-                dps: 6.50,
-                health: "130%",
-                use: "Pure combat predator that cleans up battlefield corpses.",
-                verdict: "High food maintenance, but exceptional frontline combat asset.",
-                icon: "fa-wolf-pack-battalion"
-            },
-            {
-                name: "Husky",
-                dlc: "Vanilla",
-                wildness: 0.10,
-                diet: "Omnivore",
-                trainability: "Advanced",
-                dps: 2.30,
-                health: "85%",
-                use: "Cold-resistant hauling dog that provides high mood boosts when petted.",
-                verdict: "Excellent all-around companion pet for temperate and cold climates.",
-                icon: "fa-dog"
-            },
-            {
-                name: "Elephant",
-                dlc: "Vanilla",
-                wildness: 0.75,
-                diet: "Herbivore",
-                trainability: "Advanced",
-                dps: 7.20,
-                health: "300%",
-                use: "Colossal hauling capacity and devastating tank in combat.",
-                verdict: "Amazing if you have vast vegetation or crops to sustain their huge appetite.",
-                icon: "fa-shield-dog"
-            },
-            {
-                name: "Lox",
-                dlc: "Royalty DLC",
-                wildness: 0.70,
-                diet: "Herbivore",
-                trainability: "Intermediate",
-                dps: 6.20,
-                health: "250%",
-                use: "Massive mount and caravan beast introduced in Royalty. Unmatched carrying power.",
-                verdict: "Essential for mid-to-late game trading caravans and base defense.",
-                icon: "fa-shield-dog"
-            },
-            {
-                name: "Dromedary",
-                dlc: "Vanilla",
-                wildness: 0.65,
-                diet: "Herbivore",
-                trainability: "Intermediate",
-                dps: 2.80,
-                health: "110%",
-                use: "Desert pack animal that produces milk and travels efficiently in hot climates.",
-                verdict: "Indispensable for arid and desert playthroughs.",
-                icon: "fa-otter"
-            },
-            {
-                name: "Bison",
-                dlc: "Vanilla",
-                wildness: 0.65,
-                diet: "Herbivore",
-                trainability: "Intermediate",
-                dps: 3.20,
-                health: "120%",
-                use: "Excellent pack animal producing warm wool and milk.",
-                verdict: "Direct upgrade to muffalo in colder biomes due to wool quality.",
-                icon: "fa-horse-head"
-            },
-            {
-                name: "Cougar",
-                dlc: "Vanilla",
-                wildness: 0.80,
-                diet: "Carnivore",
-                trainability: "Advanced",
-                dps: 4.90,
-                health: "110%",
-                use: "Stealthy predator guard pet and hunter assistant.",
-                verdict: "Great combat companion for ranger pawns.",
-                icon: "fa-cat"
-            },
-            {
-                name: "Timber Wolf",
-                dlc: "Vanilla",
-                wildness: 0.70,
-                diet: "Carnivore",
-                trainability: "Advanced",
-                dps: 3.80,
-                health: "100%",
-                use: "Pack hunting animal with solid hauling capability.",
-                verdict: "Easier to tame than bears with solid pack combat power.",
-                icon: "fa-dog"
-            },
-            {
-                name: "Dryad (Gaumaker)",
-                dlc: "Ideology DLC",
-                wildness: 0.30,
-                diet: "Special (Gaumtree)",
-                trainability: "None",
-                dps: 2.50,
-                health: "90%",
-                use: "Symbiotic tree guardian with specialized variants (carrier, clawer, barkskin).",
-                verdict: "Essential utility tied to Gauranlen tree pruning.",
-                icon: "fa-tree"
-            }
+            // --- FARM & PACK ANIMALS ---
+            { name: "Muffalo", dlc: "Vanilla", wildness: 0.60, diet: "Herbivore", trainability: "Intermediate", dps: 3.05, health: "100%", use: "Exceptional pack animal for caravans, produces daily wool and milk.", verdict: "Highly worth taming early for long-distance trading and warm winter apparel.", icon: "fa-horse" },
+            { name: "Dromedary", dlc: "Vanilla", wildness: 0.65, diet: "Herbivore", trainability: "Intermediate", dps: 2.80, health: "110%", use: "Desert pack animal that produces milk and travels efficiently in hot climates.", verdict: "Indispensable for arid and desert playthroughs.", icon: "fa-otter" },
+            { name: "Bison", dlc: "Vanilla", wildness: 0.65, diet: "Herbivore", trainability: "Intermediate", dps: 3.20, health: "120%", use: "Excellent pack animal producing warm wool and milk.", verdict: "Direct upgrade to muffalo in colder biomes due to wool quality.", icon: "fa-horse-head" },
+            { name: "Alpaca", dlc: "Vanilla", wildness: 0.50, diet: "Herbivore", trainability: "Intermediate", dps: 2.10, health: "80%", use: "Produces luxury alpaca wool and serves as a minor pack animal.", verdict: "Great for textile farming and nice caravan weight support.", icon: "fa-sheep" },
+            { name: "Donkey", dlc: "Vanilla", wildness: 0.55, diet: "Herbivore", trainability: "Intermediate", dps: 2.50, health: "90%", use: "Fast caravan movement speed and reliable pack animal.", verdict: "Valuable for fast world map traversal.", icon: "fa-horse" },
+            { name: "Horse", dlc: "Vanilla", wildness: 0.60, diet: "Herbivore", trainability: "Intermediate", dps: 2.90, health: "95%", use: "Ridable mount on the world map, providing extreme caravan speed.", verdict: "Must-have for nomadic playthroughs.", icon: "fa-horse" },
+            { name: "Elephant", dlc: "Vanilla", wildness: 0.75, diet: "Herbivore", trainability: "Advanced", dps: 7.20, health: "300%", use: "Colossal hauling capacity and devastating tank in combat.", verdict: "Amazing if you have vast vegetation or crops to sustain their huge appetite.", icon: "fa-shield-dog" },
+            { name: "Cow", dlc: "Vanilla", wildness: 0.45, diet: "Herbivore", trainability: "None", dps: 2.00, health: "90%", use: "High volume milk production.", verdict: "Great for food independence without hunting.", icon: "fa-cow" },
+            { name: "Sheep", dlc: "Vanilla", wildness: 0.45, diet: "Herbivore", trainability: "None", dps: 1.80, health: "75%", use: "Produces wool frequently.", verdict: "Easy textile source for temperate colonies.", icon: "fa-sheep" },
+            { name: "Pig", dlc: "Vanilla", wildness: 0.40, diet: "Omnivore", trainability: "Intermediate", dps: 2.60, health: "100%", use: "Omnivorous eater that disposes of waste and yields heavy meat.", verdict: "Great farm animal for garbage disposal and meat.", icon: "fa-piggy-bank" },
+            { name: "Chicken", dlc: "Vanilla", wildness: 0.20, diet: "Herbivore", trainability: "None", dps: 0.80, health: "40%", use: "Prolific egg layers.", verdict: "Insane food source if managed properly.", icon: "fa-egg" },
+            { name: "Goat", dlc: "Vanilla", wildness: 0.50, diet: "Herbivore", trainability: "None", dps: 2.20, health: "85%", use: "Milk production and rugged survivability.", verdict: "Solid livestock for rocky hills.", icon: "fa-mountain" },
+
+            // --- PETS & HAULERS ---
+            { name: "Labrador Retriever", dlc: "Vanilla", wildness: 0.05, diet: "Omnivore", trainability: "Advanced", dps: 2.10, health: "80%", use: "Top-tier hauling pet, boosts colony mood when petted, eats simple kibble.", verdict: "Must-have pet. Never release a self-tamed dog; they provide huge mood buffs and do heavy lifting.", icon: "fa-dog" },
+            { name: "Husky", dlc: "Vanilla", wildness: 0.10, diet: "Omnivore", trainability: "Advanced", dps: 2.30, health: "85%", use: "Cold-resistant hauling dog that provides high mood boosts when petted.", verdict: "Excellent all-around companion pet for temperate and cold climates.", icon: "fa-dog" },
+            { name: "Cat", dlc: "Vanilla", wildness: 0.15, diet: "Carnivore", trainability: "None", dps: 1.10, health: "40%", use: "Hunts rats/mice and provides cozy pet interactions for mood.", verdict: "Pure mood and pest control pet.", icon: "fa-cat" },
+            { name: "Yorkshire Terrier", dlc: "Vanilla", wildness: 0.05, diet: "Omnivore", trainability: "Intermediate", dps: 0.90, health: "35%", use: "Tiny pet that eats almost nothing and gives mood buffs.", verdict: "Charming apartment pet.", icon: "fa-dog" },
+            { name: "Pig", dlc: "Vanilla", wildness: 0.40, diet: "Omnivore", trainability: "Intermediate", dps: 2.60, health: "100%", use: "Trainable for hauling heavy items.", verdict: "Surprisingly good haulers.", icon: "fa-piggy-bank" },
+
+            // --- PREDATORS & COMBAT BEASTS ---
+            { name: "Grizzly Bear", dlc: "Vanilla", wildness: 0.80, diet: "Carnivore", trainability: "Advanced", dps: 5.36, health: "150%", use: "Fierce combat guard animal and hauling specialist for heavy items.", verdict: "Worth taming if you have high animal skill and excess meat to feed carnivores.", icon: "fa-paw" },
+            { name: "Polar Bear", dlc: "Vanilla", wildness: 0.82, diet: "Carnivore", trainability: "Advanced", dps: 5.70, health: "160%", use: "Arctic combat powerhouse and hauling beast.", verdict: "Essential guard asset for ice sheet and sea ice survival.", icon: "fa-snowflake" },
+            { name: "Thrumbo", dlc: "Vanilla", wildness: 0.95, diet: "Dendrovorous (Eats Trees)", trainability: "Advanced", dps: 9.70, health: "600%", use: "God-tier combat tank, supreme caravan carrying capacity, valuable horn/fur.", verdict: "Incredible reward if successfully tamed by a master animal handler, but very high revenge risk.", icon: "fa-dragon" },
+            { name: "Megasloth", dlc: "Vanilla", wildness: 0.85, diet: "Herbivore", trainability: "Intermediate", dps: 4.80, health: "220%", use: "Heavy wool producer (Megasloth wool has insane cold armor rating) and powerful defender.", verdict: "Great long-term investment for cold-biome colonies.", icon: "fa-hippo" },
+            { name: "Warg", dlc: "Vanilla", wildness: 0.75, diet: "Strict Carnivore (Only raw meat/corpses)", trainability: "Advanced", dps: 6.50, health: "130%", use: "Pure combat predator that cleans up battlefield corpses.", verdict: "High food maintenance, but exceptional frontline combat asset.", icon: "fa-wolf-pack-battalion" },
+            { name: "Timber Wolf", dlc: "Vanilla", wildness: 0.70, diet: "Carnivore", trainability: "Advanced", dps: 3.80, health: "100%", use: "Pack hunting animal with solid hauling capability.", verdict: "Easier to tame than bears with solid pack combat power.", icon: "fa-dog" },
+            { name: "Arctic Wolf", dlc: "Vanilla", wildness: 0.70, diet: "Carnivore", trainability: "Advanced", dps: 3.90, health: "105%", use: "Cold-adapted hunting companion.", verdict: "Great guard dog for northern forests.", icon: "fa-snowflake" },
+            { name: "Cougar", dlc: "Vanilla", wildness: 0.80, diet: "Carnivore", trainability: "Advanced", dps: 4.90, health: "110%", use: "Stealthy predator guard pet and hunter assistant.", verdict: "Great combat companion for ranger pawns.", icon: "fa-cat" },
+            { name: "Panther", dlc: "Vanilla", wildness: 0.80, diet: "Carnivore", trainability: "Advanced", dps: 5.10, health: "115%", use: "Aggressive hunting predator and base guard.", verdict: "Highly effective combat asset.", icon: "fa-cat" },
+            { name: "Lynx", dlc: "Vanilla", wildness: 0.75, diet: "Carnivore", trainability: "Advanced", dps: 3.20, health: "80%", use: "Cold climate hunter.", verdict: "Good mobile scout pet.", icon: "fa-paw" },
+            { name: "Wolverine", dlc: "Vanilla", wildness: 0.75, diet: "Carnivore", trainability: "Intermediate", dps: 4.10, health: "90%", use: "Fierce pound-for-pound fighter relative to its small size.", verdict: "Surprising combat tenacity.", icon: "fa-shield-cat" },
+            { name: "Fox (Red/Arctic)", dlc: "Vanilla", wildness: 0.50, diet: "Omnivore", trainability: "Intermediate", dps: 1.80, health: "60%", use: "Small hunter companion.", verdict: "Cute low-maintenance pet.", icon: "fa-paw" },
+            { name: "Raccoon", dlc: "Vanilla", wildness: 0.35, diet: "Omnivore", trainability: "Intermediate", dps: 1.20, health: "50%", use: "Scavenger pet.", verdict: "Fun low-threat companion.", icon: "fa-mask" },
+            { name: "Squirrel", dlc: "Vanilla", wildness: 0.25, diet: "Herbivore", trainability: "None", dps: 0.50, health: "25%", use: "Tiny forest critter.", verdict: "Not recommended for utility.", icon: "fa-tree" },
+            { name: "Hare / Rabbit", dlc: "Vanilla", wildness: 0.30, diet: "Herbivore", trainability: "None", dps: 0.60, health: "30%", use: "Fast breeding small herbivore.", verdict: "Easy meat source if penned.", icon: "fa-carrot" },
+
+            // --- INSECTS & REPTILES ---
+            { name: "Megaspider", dlc: "Vanilla", wildness: 0.90, diet: "Omnivore", trainability: "None", dps: 8.40, health: "220%", use: "Terrifying armored insectoid combat tank. Spawns from insect hives.", verdict: "Unstoppable melee blocker if you can manage to keep it fed.", icon: "fa-bug" },
+            { name: "Spelopede", dlc: "Vanilla", wildness: 0.85, diet: "Omnivore", trainability: "None", dps: 5.80, health: "150%", use: "Medium insectoid combat unit.", verdict: "Strong meat shield.", icon: "fa-bug" },
+            { name: "Scarab", dlc: "Vanilla", wildness: 0.80, diet: "Omnivore", trainability: "None", dps: 3.10, health: "100%", use: "Small insectoid defender.", verdict: "Decent swarm distraction.", icon: "fa-bug" },
+            { name: "Cobra", dlc: "Vanilla", wildness: 0.75, diet: "Carnivore", trainability: "None", dps: 3.50, health: "60%", use: "Venomous bite defense.", verdict: "Good perimeter deterrent.", icon: "fa-worm" },
+            { name: "Iguana", dlc: "Vanilla", wildness: 0.50, diet: "Herbivore", trainability: "None", dps: 1.50, health: "70%", use: "Desert reptile pet.", verdict: "Low food requirements.", icon: "fa-dragon" },
+            { name: "Tortoise", dlc: "Vanilla", wildness: 0.35, diet: "Herbivore", trainability: "None", dps: 2.20, health: "90%", use: "Legendary meme combat power (famous for biting off raider toes).", verdict: "Hilariously overpowered melee ankle-biter.", icon: "fa-shield" },
+
+            // --- ROYALTY & IDEOLOGY DLCs ---
+            { name: "Lox", dlc: "Royalty DLC", wildness: 0.70, diet: "Herbivore", trainability: "Intermediate", dps: 6.20, health: "250%", use: "Massive mount and caravan beast introduced in Royalty. Unmatched carrying power.", verdict: "Essential for mid-to-late game trading caravans and base defense.", icon: "fa-shield-dog" },
+            { name: "Dryad (Gaumaker)", dlc: "Ideology DLC", wildness: 0.30, diet: "Special (Gaumtree)", trainability: "None", dps: 2.50, health: "90%", use: "Symbiotic tree guardian with specialized variants (carrier, clawer, barkskin).", verdict: "Essential utility tied to Gauranlen tree pruning.", icon: "fa-tree" },
+
+            // --- BIOTECH & ANOMALY DLCs ---
+            { name: "Waster / Polluted Creature", dlc: "Biotech DLC", wildness: 0.65, diet: "Omnivore", trainability: "Intermediate", dps: 3.40, health: "110%", use: "Thrives in toxic wastepacks and polluted terrain.", verdict: "Great for polluted wasteland playthroughs.", icon: "fa-biohazard" },
+            { name: "Fleshbeast / Shambler", dlc: "Anomaly DLC", wildness: 0.90, diet: "Corpse / Flesh", trainability: "None", dps: 6.00, health: "140%", use: "Horrific entity brought forth by anomaly dark psychic whispers.", verdict: "Hostile anomaly creature; cannot be traditionally tamed.", icon: "fa-skull" },
+            { name: "Nociosphere Entity", dlc: "Anomaly DLC", wildness: 0.99, diet: "Energy", trainability: "None", dps: 15.00, health: "500%", use: "Uncontrollable dark archotech weapon entity.", verdict: "Too dangerous to tame; containment required.", icon: "fa-atom" }
         ];
 
         // Core Functions
