@@ -84,4 +84,331 @@
                     <!-- Stylized Graphic Container -->
                     <div class="w-full h-48 bg-gradient-to-b from-slate-900/90 to-slate-950 rounded-xl border border-slate-800 flex flex-col items-center justify-center relative overflow-hidden shadow-inner mb-6 group">
                         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.08)_0%,transparent_70%)]"></div>
-                        <div class="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration
+                        <div class="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i id="creature-icon" class="fa-solid fa-horse text-amber-400 text-3xl drop-shadow"></i>
+                        </div>
+                        <span class="text-[11px] text-slate-400 font-mono tracking-widest uppercase">Target Analyzed</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800/80 grid grid-cols-2 gap-2 text-xs text-slate-300">
+                    <div id="creature-diet" class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800"><strong>Diet:</strong> Herbivore</div>
+                    <div id="creature-trainability" class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800"><strong>Train:</strong> Intermediate</div>
+                </div>
+            </div>
+
+            <!-- Column 2: Taming Statistics & Probabilities -->
+            <div class="rim-card rounded-2xl p-6 flex flex-col justify-between shadow-xl">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs uppercase tracking-wider font-semibold text-slate-400">Taming Probability Breakdown</span>
+                        <i class="fa-solid fa-bullseye text-amber-400"></i>
+                    </div>
+
+                    <div class="bg-slate-950/80 rounded-xl p-4 border border-amber-500/20 mb-4 text-center shadow-inner">
+                        <span class="text-[10px] text-slate-400 uppercase font-semibold block mb-1 tracking-wider">Success Chance Per Attempt</span>
+                        <h3 id="tame-chance" class="text-3xl font-black text-amber-400 font-mono">14.2%</h3>
+                        <p id="tame-attempts-text" class="text-xs text-slate-400 mt-1">Estimated ~7 attempts required</p>
+                    </div>
+
+                    <div class="space-y-2.5 text-xs">
+                        <div class="flex justify-between p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Failure Rate:</span>
+                            <span id="fail-rate" class="text-rose-400 font-mono font-bold">85.8%</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Revenge / Attack Probability:</span>
+                            <span id="revenge-rate" class="text-amber-400 font-mono font-bold">12.4%</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-slate-900/60 rounded-xl border border-slate-800">
+                            <span class="text-slate-400">Expected Attacks in Series:</span>
+                            <span id="expected-attacks" class="text-rose-400 font-mono font-bold">0.87 times</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-400 text-center flex justify-between items-center">
+                    <span>Success vs Revenge Ratio:</span>
+                    <strong id="ratio-text" class="text-white font-mono bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800">1.1 : 1</strong>
+                </div>
+            </div>
+
+            <!-- Column 3: Combat Stats & Colony Worth -->
+            <div class="rim-card rounded-2xl p-6 flex flex-col justify-between shadow-xl">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs uppercase tracking-wider font-semibold text-slate-400">Combat & Utility Analysis</span>
+                        <i class="fa-solid fa-shield-heart text-amber-400"></i>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 mb-4 text-center">
+                        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 shadow-inner">
+                            <span class="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">Average DPS</span>
+                            <span id="stat-dps" class="text-base font-bold text-amber-400 font-mono">3.05</span>
+                        </div>
+                        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 shadow-inner">
+                            <span class="text-[10px] text-slate-400 uppercase font-semibold block mb-0.5">Health Scale</span>
+                            <span id="stat-health" class="text-base font-bold text-sky-400 font-mono">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2.5 text-xs">
+                        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                            <strong class="text-amber-400 block mb-1 flex items-center gap-1.5"><i class="fa-solid fa-star text-[10px]"></i> What it's good for:</strong>
+                            <p id="creature-use" class="text-slate-300 leading-relaxed">Pack animal, milk production, and shearing wool.</p>
+                        </div>
+                        <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                            <strong class="text-emerald-400 block mb-1 flex items-center gap-1.5"><i class="fa-solid fa-scale-balanced text-[10px]"></i> Effort vs Reward Verdict:</strong>
+                            <p id="creature-verdict" class="text-slate-300 leading-relaxed">Highly worth taming for caravan support and clothing materials.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-400 text-center">
+                    <span>Wildness Multiplier Evaluated</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section 4: Self-Tame Event Analyzer -->
+        <section class="rim-card rounded-2xl p-6 sm:p-8 shadow-xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-amber-400 rim-font flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Self-Tame Event Evaluator
+                </h3>
+                <span class="text-xs bg-amber-500/10 text-amber-400 px-3 py-1 rounded-lg border border-amber-500/30 font-medium">Colony Safety Check</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Self-Tame Count / Quantity</label>
+                    <input type="number" id="selftame-count" min="1" max="1000" value="2" class="w-full bg-slate-900 border border-slate-700 hover:border-amber-500/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 font-mono shadow-inner">
+                </div>
+                <div class="md:col-span-2 bg-slate-950/80 p-5 rounded-xl border border-slate-800 shadow-inner flex flex-col justify-center">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                            <i id="selftame-icon" class="fa-solid fa-face-smile text-emerald-400 text-sm"></i>
+                        </div>
+                        <h4 id="selftame-title" class="font-bold text-sm text-white">RECOMMENDATION: Keep & Enjoy</h4>
+                    </div>
+                    <p id="selftame-desc" class="text-xs text-slate-300 leading-relaxed">
+                        Small pet numbers provide excellent mood boosts when colonists interact with them, require minimal food overhead, and offer great hauling utility if trainable.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-400">
+        <p>RimWorld Taming & Colony Intelligence Tool &bull; Compatible with RimWorld v1.6 & All Expansions</p>
+    </footer>
+
+    <!-- JavaScript Engine -->
+    <script>
+        // Creature Database (Vanilla + DLCs)
+        const creatures = [
+            {
+                name: "Muffalo",
+                dlc: "Vanilla",
+                wildness: 0.60,
+                diet: "Herbivore",
+                trainability: "Intermediate",
+                dps: 3.05,
+                health: "100%",
+                use: "Exceptional pack animal for caravans, produces daily wool and milk.",
+                verdict: "Highly worth taming early for long-distance trading and warm winter apparel.",
+                icon: "fa-horse"
+            },
+            {
+                name: "Labrador Retriever",
+                dlc: "Vanilla",
+                wildness: 0.05,
+                diet: "Omnivore",
+                trainability: "Advanced",
+                dps: 2.10,
+                health: "80%",
+                use: "Top-tier hauling pet, boosts colony mood when petted, eats simple kibble.",
+                verdict: "Must-have pet. Never release a self-tamed dog; they provide huge mood buffs and do heavy lifting.",
+                icon: "fa-dog"
+            },
+            {
+                name: "Grizzly Bear",
+                dlc: "Vanilla",
+                wildness: 0.80,
+                diet: "Carnivore",
+                trainability: "Advanced",
+                dps: 5.36,
+                health: "150%",
+                use: "Fierce combat guard animal and hauling specialist for heavy items.",
+                verdict: "Worth taming if you have high animal skill and excess meat to feed carnivores.",
+                icon: "fa-paw"
+            },
+            {
+                name: "Thrumbo",
+                dlc: "Vanilla",
+                wildness: 0.95,
+                diet: "Dendrovorous (Eats Trees)",
+                trainability: "Advanced",
+                dps: 9.70,
+                health: "600%",
+                use: "God-tier combat tank, supreme caravan carrying capacity, valuable horn/fur.",
+                verdict: "Incredible reward if successfully tamed by a master animal handler, but very high revenge risk.",
+                icon: "fa-dragon"
+            },
+            {
+                name: "Megasloth",
+                dlc: "Vanilla",
+                wildness: 0.85,
+                diet: "Herbivore",
+                trainability: "Intermediate",
+                dps: 4.80,
+                health: "220%",
+                use: "Heavy wool producer (Megasloth wool has insane cold armor rating) and powerful defender.",
+                verdict: "Great long-term investment for cold-biome colonies.",
+                icon: "fa-hippo"
+            },
+            {
+                name: "Warg",
+                dlc: "Vanilla",
+                wildness: 0.75,
+                diet: "Strict Carnivore (Only raw meat/corpses)",
+                trainability: "Advanced",
+                dps: 6.50,
+                health: "130%",
+                use: "Pure combat predator that cleans up battlefield corpses.",
+                verdict: "High food maintenance, but exceptional frontline combat asset.",
+                icon: "fa-wolf-pack-battalion"
+            },
+            {
+                name: "Lox",
+                dlc: "Royalty DLC",
+                wildness: 0.70,
+                diet: "Herbivore",
+                trainability: "Intermediate",
+                dps: 6.20,
+                health: "250%",
+                use: "Massive mount and caravan beast introduced in Royalty. Unmatched carrying power.",
+                verdict: "Essential for mid-to-late game trading caravans and base defense.",
+                icon: "fa-shield-dog"
+            },
+            {
+                name: "Dromedary",
+                dlc: "Vanilla",
+                wildness: 0.65,
+                diet: "Herbivore",
+                trainability: "Intermediate",
+                dps: 2.80,
+                health: "110%",
+                use: "Desert pack animal that produces milk and travels efficiently in hot climates.",
+                verdict: "Indispensable for arid and desert playthroughs.",
+                icon: "fa-otter"
+            },
+            {
+                name: "Alpha Thrumbo",
+                dlc: "Mod / Expansion",
+                wildness: 0.98,
+                diet: "Dendrovorous",
+                trainability: "Advanced",
+                dps: 12.50,
+                health: "800%",
+                use: "Ultimate mythical beast with terror roar ability and extreme armor scaling.",
+                verdict: "Only attempt if your tamer is inspired or hyper-specialized.",
+                icon: "fa-fire-flame-curved"
+            }
+        ];
+
+        // Populate Dropdown safely on DOM content load
+        const selectEl = document.getElementById('creature-select');
+        
+        function initDropdown() {
+            if (!selectEl) return;
+            selectEl.innerHTML = ""; // Clear existing
+            creatures.forEach((c, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = `${c.name} (${c.dlc} - Wildness: ${Math.round(c.wildness * 100)}%)`;
+                selectEl.appendChild(opt);
+            });
+        }
+
+        // Calculation Engine
+        function calculateTaming() {
+            if (!selectEl || selectEl.value === "") return;
+            const selectedCreature = creatures[selectEl.value];
+            const skill = parseInt(document.getElementById('pawn-skill').value) || 0;
+            const passion = parseInt(document.getElementById('pawn-passion').value) || 0;
+
+            let skillMultiplier = (skill * 0.015) + 0.08;
+            let passionBonus = passion === 2 ? 0.05 : (passion === 1 ? 0.02 : 0);
+            
+            let rawChance = (skillMultiplier + passionBonus) * (1.2 - selectedCreature.wildness) * 100;
+            let tameChance = Math.max(0.5, Math.min(98.0, rawChance));
+            
+            let estimatedAttempts = Math.ceil(100 / tameChance);
+            let failRate = 100 - tameChance;
+            let revengeRate = (failRate * (selectedCreature.wildness * 0.22)).toFixed(1);
+            let expectedAttacks = ((estimatedAttempts * (parseFloat(revengeRate) / 100))).toFixed(2);
+            let ratio = (tameChance / (parseFloat(revengeRate) || 1)).toFixed(1);
+
+            // Update DOM Elements
+            document.getElementById('creature-name').textContent = selectedCreature.name;
+            document.getElementById('creature-icon').className = `fa-solid ${selectedCreature.icon} text-amber-400 text-3xl drop-shadow`;
+            document.getElementById('creature-dlc-tag').textContent = selectedCreature.dlc;
+            document.getElementById('creature-diet').innerHTML = `<strong>Diet:</strong> ${selectedCreature.diet}`;
+            document.getElementById('creature-trainability').innerHTML = `<strong>Train:</strong> ${selectedCreature.trainability}`;
+            
+            document.getElementById('tame-chance').textContent = tameChance.toFixed(1) + '%';
+            document.getElementById('tame-attempts-text').textContent = `Estimated ~${estimatedAttempts} attempts required`;
+            document.getElementById('fail-rate').textContent = failRate.toFixed(1) + '%';
+            document.getElementById('revenge-rate').textContent = revengeRate + '%';
+            document.getElementById('expected-attacks').textContent = expectedAttacks + ' times';
+            document.getElementById('ratio-text').textContent = `${ratio} : 1`;
+
+            document.getElementById('stat-dps').textContent = selectedCreature.dps;
+            document.getElementById('stat-health').textContent = selectedCreature.health;
+            document.getElementById('creature-use').textContent = selectedCreature.use;
+            document.getElementById('creature-verdict').textContent = selectedCreature.verdict;
+        }
+
+        // Self-Tame Logic Evaluator
+        function evaluateSelfTame() {
+            const countInput = document.getElementById('selftame-count');
+            if (!countInput) return;
+            const count = parseInt(countInput.value) || 1;
+            const titleEl = document.getElementById('selftame-title');
+            const descEl = document.getElementById('selftame-desc');
+            const iconEl = document.getElementById('selftame-icon');
+
+            if (count > 50) {
+                iconEl.className = "fa-solid fa-skull-crossbones text-rose-500 text-sm";
+                titleEl.textContent = `CRITICAL WARNING: Large Herd (${count} Animals)`;
+                descEl.textContent = `Managing ${count} self-tamed animals will instantly strain your food supplies, create severe base filth leading to constant mental breaks, and unnecessarily inflate raid point calculations. It is highly recommended to release or cull down the herd.`;
+            } else if (count >= 5) {
+                iconEl.className = "fa-solid fa-triangle-exclamation text-amber-400 text-sm";
+                titleEl.textContent = `CAUTION: Moderate Herd (${count} Animals)`;
+                descEl.textContent = `Managing ${count} self-tamed animals requires dedicated animal zones and consistent food or kibble production. Ensure they provide hauling or production utility before keeping them long-term through winter.`;
+            } else {
+                iconEl.className = "fa-solid fa-face-smile text-emerald-400 text-sm";
+                titleEl.textContent = `RECOMMENDATION: Keep & Enjoy (${count} Animal)`;
+                descEl.textContent = `Small pet numbers (${count} animal) provide excellent mood boosts when colonists interact with them, require minimal food overhead, and offer great utility if trainable.`;
+            }
+        }
+
+        // Run on load
+        window.addEventListener('DOMContentLoaded', () => {
+            initDropdown();
+            calculateTaming();
+            evaluateSelfTame();
+
+            // Event Listeners
+            selectEl.addEventListener('change', calculateTaming);
+            document.getElementById('pawn-skill').addEventListener('input', calculateTaming);
+            document.getElementById('pawn-passion').addEventListener('change', calculateTaming);
+            document.getElementById('selftame-count').addEventListener('input', evaluateSelfTame);
+        });
+    </script>
+</body>
+</html>
